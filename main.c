@@ -234,10 +234,10 @@ FILE *Reviews = NULL;
                     printf("Entrada inválida\n"); 
 
                 break;
-            case 0:
+            case 5:
                 break;
             default:
-                printf("Digite um numero valido!\n");
+                printf("Nao foi possivel encontrar essa funcao\n");
                 break;
         }
     } while (Menu != 5);
