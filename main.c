@@ -2,7 +2,7 @@
 #include <string.h>
 #include <malloc.h>
 #include <math.h>
-#include "Teste.c"
+#include "FileManager.c"
 
 
 int main() {
@@ -22,7 +22,7 @@ int main() {
     char c;
     char word[100];
     int i, count = 0;
-    long int filePos;
+    long int pos;
 
    
     
@@ -34,9 +34,10 @@ int main() {
     do {
     
     printf("1.LEITURA DE ARQUIVO");
-    printf("2.GERAÇÃO DE VOCABULARIO\n");
-    printf("3.GERAÇÃO TF-ID \n");
+    printf("2.GERACAO DE VOCABULARIO\n");
+    printf("3.GERACAO TF-ID \n");
     printf("4.VIZUALIZAR TF-ID \n");
+    printf("5.SAIR")
   		scanf("%d", &Menu);
         switch (Menu) {
             case 1:
@@ -77,7 +78,7 @@ int main() {
             if(c == '"') {
                 while((c = fgetc(Reviews)) != '"') {
                 i = 0;
-                filePos = ftell(voc);
+                pos = ftell(voc);
                            
                 while(!isEndWord(c)) {
                          
@@ -235,4 +236,5 @@ int main() {
     fclose(voc);
     fclose(allTFIDF);
     return 0;
+}
 }
