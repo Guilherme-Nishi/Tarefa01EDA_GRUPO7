@@ -6,10 +6,39 @@
 
 
 int main() {
+	char c;
+    char word[100];
     int Menu;
-    char Leitura[50];
-
-    FILE *Reviews = NULL;
+    char Leitura[100];
+ 	 int i, count = 0;
+    int pos;
+	 char str[200];
+    double Contador1;
+	double Contador2;
+	double Contador3;
+	double Contador4;
+	double Contador5;
+	double PContadorN1;
+	double PContadorN2;
+	double PContadorN3;
+	double PContadorN4;
+	double PContadorN5;
+    double nDocWithWord;
+    double TF_IDF1;
+	double TF_IDF2;
+	  double TF_IDF3;
+	  double TF_IDF4;
+	  double TF_IDF5;
+	   double IDF;
+		double TF1;
+		 double TF2;
+		  double TF3;
+		  double  TF4;
+			double TF5;
+			  double x;
+			  
+			  
+FILE *Reviews = NULL;
     FILE *Nota1 = NULL;
     FILE *Nota2 = NULL;
     FILE *Nota3 = NULL;
@@ -17,27 +46,13 @@ int main() {
     FILE *Nota5 = NULL;
     FILE *voc = NULL;
     FILE *allTFIDF = NULL;
-
-    
-    char c;
-    char word[100];
-    int i, count = 0;
-    long int pos;
-
-   
-    
-    char str[200];
-    double wordCountN1, wordCountN2, wordCountN3, wordCountN4, wordCountN5, nWordsN1, nWordsN2, nWordsN3, nWordsN4, nWordsN5;
-    double nDocWithWord;
-    double TF_IDF1, TF_IDF2, TF_IDF3, TF_IDF4, TF_IDF5, IDF, TF1, TF2, TF3, TF4, TF5, x;
-
     do {
     
-    printf("1.LEITURA DE ARQUIVO");
+    printf("1.LEITURA DE ARQUIVO\n");
     printf("2.GERACAO DE VOCABULARIO\n");
     printf("3.GERACAO TF-ID \n");
     printf("4.VIZUALIZAR TF-ID \n");
-    printf("5.SAIR")
+    printf("5.SAIR");
   		scanf("%d", &Menu);
         switch (Menu) {
             case 1:
@@ -64,7 +79,7 @@ int main() {
                 break;
             case 2:
 
-                printf("Adicionando o vocabulario no arquivo voc.txt");
+             
                 if(Reviews != NULL) 
                     fclose(Reviews);
                 
@@ -127,13 +142,13 @@ int main() {
                 Nota5 = fopen("files/Nota5.txt", "r");
                 allTFIDF = fopen("files/allTFIDF.csv", "w");
 
-                nWordsN1 = numberOfWordsInFile(Nota1);
-                nWordsN2 = numberOfWordsInFile(Nota2);
-                nWordsN3 = numberOfWordsInFile(Nota3);
-                nWordsN4 = numberOfWordsInFile(Nota4);
-                nWordsN5 = numberOfWordsInFile(Nota5);
+                PContadorN1 = numberOfWordsInFile(Nota1);
+                PContadorN2 = numberOfWordsInFile(Nota2);
+                PContadorN3 = numberOfWordsInFile(Nota3);
+                PContadorN4 = numberOfWordsInFile(Nota4);
+                PContadorN5 = numberOfWordsInFile(Nota5);
 
-                printf("Gerando o arquivo dos TF-IDFs...\n"); 
+               
                 fputs("Vocabulario,Nota1,Nota2,Nota3,Nota4,Nota5\n", allTFIDF);
                 while((c = fgetc(voc)) != EOF) {
                     i = 0;
@@ -146,34 +161,34 @@ int main() {
                         i++;
                     }
                    
-                    wordCountN1 = wordCountInFile(word, Nota1);  
-                    wordCountN2 = wordCountInFile(word, Nota2);  
-                    wordCountN3 = wordCountInFile(word, Nota3);  
-                    wordCountN4 = wordCountInFile(word, Nota4);  
-                    wordCountN5 = wordCountInFile(word, Nota5);
+                    Contador1 = wordCountInFile(word, Nota1);  
+                    Contador2 = wordCountInFile(word, Nota2);  
+                    Contador3 = wordCountInFile(word, Nota3);  
+                    Contador4 = wordCountInFile(word, Nota4);  
+                    Contador5 = wordCountInFile(word, Nota5);
 
-                    if(wordCountN1)
+                    if(Contador1)
                         nDocWithWord++;
-                    if(wordCountN2)
+                    if(Contador2)
                         nDocWithWord++;
-                    if(wordCountN3)
+                    if(Contador3)
                         nDocWithWord++;
-                    if(wordCountN4)
+                    if(Contador4)
                         nDocWithWord++;
-                    if(wordCountN5)
+                    if(Contador5)
                         nDocWithWord++;
                     
                     if(nDocWithWord == 0)
                         nDocWithWord = 1;
                     
-                    //calcula o TF-IDF
+
                     x = 5.0/nDocWithWord; 
                     IDF = log10(x); 
-                    TF1 = wordCountN1/nWordsN1;
-                    TF2 = wordCountN2/nWordsN2;
-                    TF3 = wordCountN3/nWordsN3;
-                    TF4 = wordCountN4/nWordsN4;
-                    TF5 = wordCountN5/nWordsN5;
+                    TF1 = Contador1/PContadorN1;
+                    TF2 = Contador2/PContadorN2;
+                    TF3 = Contador3/PContadorN3;
+                    TF4 = Contador4/PContadorN4;
+                    TF5 = Contador5/PContadorN5;
 
                     TF_IDF1 = TF1 * IDF; 
                     TF_IDF2 = TF2 * IDF;
@@ -197,8 +212,8 @@ int main() {
 
                 allTFIDF = fopen("./files/allTFIDF.csv", "r");
                
-                printf("-> nota1, nota2, nota3, nota4 ou nota5\n");
-                printf("Digite o TF-IDF a ser visualizado: ");
+               
+                printf("QUAL TF-IDF SERÁ SELECIONADO? ");
                 scanf("%s", Leitura);
                 if(strcmp(Leitura, "nota1") == 0) { 
                     sortTFIDF(allTFIDF, 1);
@@ -236,5 +251,4 @@ int main() {
     fclose(voc);
     fclose(allTFIDF);
     return 0;
-}
 }
