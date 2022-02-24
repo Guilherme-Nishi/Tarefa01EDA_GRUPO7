@@ -234,7 +234,7 @@ int sortTFIDF(FILE *fp, int notaNum) {
     
     fseek(fp, 0, SEEK_SET);
 
-    printf("Escolha quantas palavras você deseja mostrar: ");
+    printf("Escolha quantas palavras vocï¿½ deseja mostrar: ");
     scanf("%d", &numWords);
     printf("\nPalavra | TF-IDF\n");
 
