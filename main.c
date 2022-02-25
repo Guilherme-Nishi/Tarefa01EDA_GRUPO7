@@ -38,7 +38,7 @@ int main() {
 			  double x;
 			  
 			  
-FILE *Reviews = NULL;
+FILE *tripadvisor_hotel_reviews = NULL;
     FILE *Nota1 = NULL;
     FILE *Nota2 = NULL;
     FILE *Nota3 = NULL;
@@ -56,13 +56,14 @@ FILE *Reviews = NULL;
   		scanf("%d", &Menu);
         switch (Menu) {
             case 1:
-                printf("-> ./files/reviews.csv\n");
-                printf("Digite o nome do arquivo: ");
+                
+                printf("Digite o nome do arquivo: obs:Siga o modelo:");
+                 printf("Siga o exemplo ./files/tripadvisor_hotel_reviews.csv\n");
                 scanf("%s", Leitura); 
 
-                Reviews = openFile(Leitura);
+                tripadvisor_hotel_reviews = openFile(Leitura);
 
-                if(Reviews == NULL) {
+                if(tripadvisor_hotel_reviews == NULL) {
                     printf("Arquivo não gerados\n");
                     break;
                 }
@@ -80,25 +81,25 @@ FILE *Reviews = NULL;
             case 2:
 
              
-                if(Reviews != NULL) 
-                    fclose(Reviews);
+                if(tripadvisor_hotel_reviews != NULL) 
+                    fclose(tripadvisor_hotel_reviews);
                 
                 if(voc != NULL)
                     fclose(voc);
 
-                Reviews = fopen("./files/reviews.csv", "r");
+                tripadvisor_hotel_reviews = fopen("./files/tripadvisor_hotel_reviews.csv", "r");
                 voc = fopen("./files/voc.txt", "w+");
 
-                while((c = fgetc(Reviews)) != EOF) {
+                while((c = fgetc(tripadvisor_hotel_reviews)) != EOF) {
             if(c == '"') {
-                while((c = fgetc(Reviews)) != '"') {
+                while((c = fgetc(tripadvisor_hotel_reviews)) != '"') {
                 i = 0;
                 pos = ftell(voc);
                            
                 while(!isEndWord(c)) {
                          
                                 word[i] = c;
-                                c = fgetc(Reviews); 
+                                c = fgetc(tripadvisor_hotel_reviews); 
                                 i++;
                             }
                   
@@ -234,15 +235,15 @@ FILE *Reviews = NULL;
                     printf("Entrada inválida\n"); 
 
                 break;
-            case 5:
+            case 0:
                 break;
             default:
-                printf("Nao foi possivel encontrar essa funcao\n");
+                printf("Digite um numero valido!\n");
                 break;
         }
     } while (Menu != 5);
 
-    fclose(Reviews);
+    fclose(tripadvisor_hotel_reviews);
     fclose(Nota1);
     fclose(Nota2);
     fclose(Nota3);
