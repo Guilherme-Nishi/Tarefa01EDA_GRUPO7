@@ -73,7 +73,7 @@ FILE *tripadvisor_hotel_reviews = NULL;
                 Nota3 = fopen("./files/Nota3.txt", "w");
                 Nota4 = fopen("./files/Nota4.txt", "w");
                 Nota5 = fopen("./files/Nota5.txt", "w");
-
+		sortByRating(tripadvisor_hotel_reviews, Nota1, Nota2, Nota3, Nota4, Nota5);
 
 
                 printf("Arquivos gerados com sucesso");
