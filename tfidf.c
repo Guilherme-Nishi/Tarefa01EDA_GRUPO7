@@ -43,3 +43,26 @@ int wordCounterAndVectorFiller(FILE *arc, char *wordVector)
     }
     return wordCounter;
 }
+
+void tfIDFer(FILE *arc, WordTFIDF *wordTFIDFVector)
+{
+    //wordVector -- vetor das palavras contidas no arquivo
+    //wordTFIDF vector -- vetor usando a struct TFIDF sobre as notas das palavras
+    int wordCounter = wordCounterAndVectorFiller(arc, &wordVector);
+    for (int i = 0; i < wordCounter; i++)
+    {
+        if (*wordTFIDFVector[i].word == "") continue;
+        for (int j = 0; j < wordCounter; j++)
+        {
+            if (!strcmp(*wordVector[i], *wordVector[j]))
+            {
+                *wordTFIDFVector[i].score++;
+                *wordVector[j] = "";
+            }    
+        }
+        if (*wordTFIDFVector[i].word != "")
+        {
+            strcpy(*wordTFIDFVector[i].word, *wordVector[i]);
+        }
+    }
+}
